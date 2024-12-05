@@ -1,0 +1,87 @@
+.welcome-mesg {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.quick-create {
+  display: block;
+
+  background-color: wheat;
+  padding: 15px;
+
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 100px;
+
+  color: black;
+  text-align: center;
+  text-decoration: none;
+}
+
+.entries__title {
+  font-weight: normal;
+  font-size: 24px;
+}
+
+.entry-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  gap: 1.5em;
+}
+
+
+.entry {
+  background-color: #d6d6d6;
+  color: #000;
+  text-decoration: none;
+
+  padding: 8px 12px;
+  width: 100%;
+
+  border-radius: 20px;
+
+  display: grid;
+  grid-template:
+            "title title" max-content
+            "text text" 1fr
+            "meta meta" max-content;
+  gap: 4px
+}
+
+.entry__title {
+  grid-area: title;
+  margin: 0;
+
+  font-size: 20px
+}
+
+.entry__text {
+  margin: 0;
+  vertical-align: top;
+  grid-area: text;
+}
+
+.entry__meta {
+  grid-area: meta;
+  border-top: 0.8px solid #2d2d2d;
+  padding-top: 4px;
+
+  display: grid;
+  grid-template-columns: 1fr max-content;
+}
+
+.entry__tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.entry__time {
+
+}

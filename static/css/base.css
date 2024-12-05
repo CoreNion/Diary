@@ -1,3 +1,45 @@
 body {
-  background-color: antiquewhite;
+  margin: 0;
+  background-color: white;
+}
+
+.top-navbar {
+  padding: 14px;
+  background-color: #D9D9D9;
+
+  border-bottom: solid 1px;
+
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+}
+
+.top-navbar__search {
+  font-size: 24px;
+
+  background: none;
+  border: none;
+}
+
+.top-navbar__title {
+  color: black;
+
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
+
+  text-decoration: none;
+}
+
+.top-navbar__account {
+  background-color: dimgray;
+  border-radius: 100%;
+
+  text-align: right;
+
+  width: 38px;
+  height: 38px;
+}
+
+.main {
+  margin: 10px;
 }
