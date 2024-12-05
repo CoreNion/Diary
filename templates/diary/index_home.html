@@ -8,25 +8,27 @@
 
 {% block content %}
 
-<h1 class="welcome-mesg">welcome back, ####!</h1>
+<h1 class="welcome-mesg">welcome back, {{ user.username }}!</h1>
 <a href="./create" class="quick-create">エントリーを作成</a>
 
 <section class="entries">
   <h2 class="entries__title">最近の投稿</h2>
 
   <div class="entry-list">
-      <a href="" class="entry">
-        <h3 class="entry__title">テストテスト</h3>
-        <p class="entry__text">ああああああああああ</p>
+    {% for entry in entry_list %}
+    <a href="" class="entry">
+      <h3 class="entry__title">{{ entry.title }}</h3>
+      <p class="entry__text">{{ entry.content }}</p>
   
-        <div class="entry__meta">
-          <ul class="entry__tags">
-            <li>#あいう</li>
-            <li>#えおか</li>
-          </ul>
-          <time datetime="" class="entry__time">2024/12/05</time>
-        </div>
-      </a>
+      <div class="entry__meta">
+        <ul class="entry__tags">
+          <li>#あいう</li>
+          <li>#えおか</li>
+        </ul>
+        <time datetime="" class="entry__time">{{ entry.date }}</time>
+      </div>
+    </a>
+    {% endfor %}
   </div>
 </section>
 
