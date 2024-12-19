@@ -9,14 +9,14 @@
 {% block content %}
 
 <h1 class="welcome-mesg">welcome back, {{ user.username }}!</h1>
-<a href="./create" class="quick-create">エントリーを作成</a>
+<a href="{% url "diary:create" %}" class="quick-create">エントリーを作成</a>
 
 <section class="entries">
   <h2 class="entries__title">最近の投稿</h2>
 
   <div class="entry-list">
     {% for entry in entry_list %}
-    <a href="" class="entry">
+    <a href="{% url "diary:editor" entry.pk %}" class="entry">
       <h3 class="entry__title">{{ entry.title }}</h3>
       <p class="entry__text">{{ entry.content }}</p>
   

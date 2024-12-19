@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
 
@@ -16,4 +16,16 @@ class CreateEntryView(LoginRequiredMixin, CreateView):
   template_name = "diary/editer.html"
   model = EntryModel
   fields = {"title", "content", "tags", "date"}
-  success_url = reverse_lazy("index")
+  success_url = reverse_lazy("diary:home")
+
+class UpdateEntryView(LoginRequiredMixin, UpdateView):
+  template_name = "diary/editer.html"
+  model = EntryModel
+  fields = {"title", "content", "tags", "date"}
+  success_url = reverse_lazy("diary:home")
+
+  def get_object(self, queryset=None):
+    obj: EntryModel = super().get_object(queryset)
+    obj.date = obj.date.strftime("%Y-%m-%dT%H:%M")
+
+    return obj
