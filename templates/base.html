@@ -16,14 +16,19 @@
   <header class="top-navbar">
     <button class="top-navbar__search">🔍</button>
 
-    <a href="/" class="top-navbar__title">Diary</a>
+    <a href="{% url "diary:home" %}" class="top-navbar__title">Diary</a>
 
     {% if request.user.is_authenticated %}
+    <!-- TO DO: プロフィール機能の実装 
     <a href="" class="top-navbar__account">
       <img src="" alt="" class="top-navbar__account__icon">
-    </a>
+    </a> -->
+    <form method="POST" action="{% url "accounts:logout" %}" class="top-navbar__logout">
+      {% csrf_token %}
+      <button type="submit">ログアウト</button>
+    </form>
     {% else %}
-    <a href="/login" class="top-navbar__login">ログイン</a>
+    <a href="{% url "accounts:login" %}" class="top-navbar__login">ログイン</a>
     {% endif %}
   </header>
 

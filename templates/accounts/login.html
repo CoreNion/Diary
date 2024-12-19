@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>ログイン</h1>
+  <form method="post" class="">
+    {% csrf_token %}
+    {% for error in form.errors.values %}
+     {{ error }}
+    {% endfor %}
+    <label>ユーザーID</label>
+    <input name="username">
+
+    <label>パスワード</label>
+    <input type="password" name="password">
+
+    <button type="submit" class="">ログインする</button>
+  </form>
+{% endblock content %}
