@@ -1,0 +1,30 @@
+.entry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.entry__textarea {
+  border: 0;
+  background: none;
+  outline: none;
+  
+  field-sizing: content;
+  max-height: 1000px;
+  
+  resize: none;
+  font-family: inherit;
+}
+
+.entry__title {
+  padding: 4px;
+
+  font-size: 24px;
+  font-weight: bold;
+
+  border-left: 2px black solid;
+}
+
+.entry__content {
+  font-size: medium;
+}
