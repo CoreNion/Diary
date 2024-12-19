@@ -13,13 +13,13 @@ def index(request):
     return render(request, "diary/index_entrance.html")
   
 class CreateEntryView(LoginRequiredMixin, CreateView):
-  template_name = "diary/editer.html"
+  template_name = "diary/editor.html"
   model = EntryModel
   fields = {"title", "content", "tags", "date"}
   success_url = reverse_lazy("diary:home")
 
 class UpdateEntryView(LoginRequiredMixin, UpdateView):
-  template_name = "diary/editer.html"
+  template_name = "diary/editor.html"
   model = EntryModel
   fields = {"title", "content", "tags", "date"}
   success_url = reverse_lazy("diary:home")
