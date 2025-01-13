@@ -10,7 +10,10 @@
 {% block content %}
 <form method="POST" enctype="multipart/form-data" id="editor-form" class="entry-form"> {% csrf_token %}
   <input type="text" name="title" id="id_title" class="entry__textarea entry__title" value="{{ form.title.value|default_if_none:'' }}" placeholder="タイトル" required>
-  <input type="datetime-local" name="date" id="id_date" class="entry__date" value="{{ form.date.value|default_if_none:'' }}" required>
+  <div class="entry__datetime">
+    <input type="date" name="date" id="id_date" class="entry__date" value="{{ form.date.value|default_if_none:'' }}" required>
+    <input type="time" name="time" id="id_time" class="entry__time" value="{{ form.time.value|default_if_none:'' }}" required>
+  </div>
   <div class="entry__tags" name="id_tags" id="id_tags">
     {% for tag in tags %}
     <div class="tag">

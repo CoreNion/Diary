@@ -15,17 +15,18 @@ def index(request):
 class CreateEntryView(LoginRequiredMixin, CreateView):
   template_name = "diary/editor.html"
   model = EntryModel
-  fields = {"title", "content", "tags", "date"}
+  fields = {"title", "content", "tags", "date", "time"}
   success_url = reverse_lazy("diary:home")
 
 class UpdateEntryView(LoginRequiredMixin, UpdateView):
   template_name = "diary/editor.html"
   model = EntryModel
-  fields = {"title", "content", "tags", "date"}
+  fields = {"title", "content", "tags", "date", "time"}
   success_url = reverse_lazy("diary:home")
 
   def get_object(self, queryset=None):
     obj: EntryModel = super().get_object(queryset)
-    obj.date = obj.date.strftime("%Y-%m-%dT%H:%M")
+    obj.date = obj.date.strftime("%Y-%m-%d")
+    obj.time = obj.time.strftime("%H:%M")
 
     return obj
