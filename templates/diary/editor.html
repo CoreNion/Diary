@@ -9,8 +9,8 @@
 
 {% block content %}
 <form method="POST" enctype="multipart/form-data" id="editor-form" class="entry-form"> {% csrf_token %}
-  <input type="text" name="title" id="id_title" class="entry__textarea entry__title" value="{{ form.title.value }}" placeholder="タイトル" required>
-  <input type="datetime-local" name="date" id="id_date" class="entry__date" value="{{ form.date.value }}" required>
+  <input type="text" name="title" id="id_title" class="entry__textarea entry__title" value="{{ form.title.value|default_if_none:'' }}" placeholder="タイトル" required>
+  <input type="datetime-local" name="date" id="id_date" class="entry__date" value="{{ form.date.value|default_if_none:'' }}" required>
   <div class="entry__tags" name="id_tags" id="id_tags">
     {% for tag in tags %}
     <div class="tag">
@@ -20,7 +20,7 @@
     
     <button type="button" id="tags__add" class="tags__add">+</button>
   </div>
-  <textarea name="content" id="id_content" class="entry__textarea entry__content" placeholder="本文を入力..." required>{{ form.content.value }}</textarea>
+  <textarea name="content" id="id_content" class="entry__textarea entry__content" placeholder="本文を入力..." required>{{ form.content.value|default_if_none:'' }}</textarea>
 
   <button type="button" id="submit__btn">保存</button>
 </form>
