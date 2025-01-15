@@ -22,8 +22,9 @@
   
       <div class="entry__meta">
         <ul class="entry__tags">
-          <li>#あいう</li>
-          <li>#えおか</li>
+          {% for tag in entry.tags %}
+            <li>#{{ tag }}</li>
+          {% endfor %}
         </ul>
         <time datetime="" class="entry__time">{{ entry.date }}</time>
       </div>
