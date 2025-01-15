@@ -27,6 +27,10 @@
           {% endfor %}
         </ul>
         <time datetime="" class="entry__time">{{ entry.date }}</time>
+        <form method="POST" action="{% url "diary:delete" entry.pk %}" class="entry__delete">
+          {% csrf_token %}
+          <button type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+        </form>
       </div>
     </a>
     {% endfor %}

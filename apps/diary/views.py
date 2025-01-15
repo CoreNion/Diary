@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
@@ -50,3 +51,9 @@ class CreateEntryView(EntryBaseView, CreateView):
 
 class UpdateEntryView(EntryBaseView, UpdateView):
     template_name = "diary/editor.html"
+
+@require_POST
+def delete_entry(request, pk):
+  entry = EntryModel.objects.get(pk=pk)
+  entry.delete()
+  return redirect("diary:home")
