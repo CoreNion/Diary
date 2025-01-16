@@ -11,13 +11,13 @@ body {
 }
 
 .top-navbar {
-  padding: 14px;
+  height: 40px;
+  padding: 8px;
   background-color: var(--primary-light-color);
-
-  border-bottom: solid 1px;
 
   display: grid;
   grid-template-columns: max-content 1fr max-content;
+  grid-auto-rows: 40px;
 }
 
 .top-navbar__search {
@@ -30,22 +30,59 @@ body {
 .top-navbar__title {
   color: black;
 
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
   text-align: center;
+  align-self: center;
 
   text-decoration: none;
 }
 
-.top-navbar__account {
-  background-color: dimgray;
-  border-radius: 100%;
-
-  text-align: right;
-
-  width: 38px;
-  height: 38px;
+.top-navbar__account__icon__img,
+.top-navbar__home__img {
+  height: 100%;
+  width: auto;
+  text-align: center;
 }
+
+.top-navbar__account__menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 50px;
+  background-color: var(--primary-light-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* ホバー時に表示 */
+.top-navbar__account:hover .top-navbar__account__menu {
+  display: block;
+}
+
+.top-navbar__account__menu a,
+.top-navbar__account__menu button {
+  display: block;
+  font-size: 14px;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: black;
+  border-radius: 12px;
+}
+
+.top-navbar__account__menu a:hover,
+.top-navbar__account__menu button:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.top-navbar__account__menu button {
+  background: none;
+  border: none;
+
+}
+
 
 .main {
   margin: 10px;

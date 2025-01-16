@@ -14,21 +14,31 @@
 
 <body>
   <header class="top-navbar">
-    <button class="top-navbar__search">🔍</button>
+    <a class="top-navbar__home" href="{% url "diary:home" %}">
+      <img src="{% static 'img/ui/home.svg' %}" alt="Home Icon" class="top-navbar__home__img">
+    </a>
 
     <a href="{% url "diary:home" %}" class="top-navbar__title">Diary</a>
 
     {% if request.user.is_authenticated %}
-    <!-- TO DO: プロフィール機能の実装 
-    <a href="" class="top-navbar__account">
-      <img src="" alt="" class="top-navbar__account__icon">
-    </a> -->
-    <form method="POST" action="{% url "accounts:logout" %}" class="top-navbar__logout">
-      {% csrf_token %}
-      <button type="submit">ログアウト</button>
-    </form>
+
+    <div class="top-navbar__account">
+      <a href="#" class="top-navbar__account__icon">
+        <img src="{% static 'img/ui/account_circle.svg' %}" alt="Profile Icon" class="top-navbar__account__icon__img">
+      </a>
+      <div class="top-navbar__account__menu">
+        <a href="">設定</a>
+        <form method="POST" action="{% url 'accounts:logout' %}">
+          {% csrf_token %}
+          <button type="submit">ログアウト</button>
+        </form>
+      </div>
+    </div>
+
     {% else %}
-    <a href="{% url "accounts:login" %}" class="top-navbar__login">ログイン</a>
+    <a href="{% url "accounts:login" %}" class="top-navbar__account__icon">
+      <img src="{% static 'img/ui/account_circle.svg' %}" alt="Profile Icon" class="top-navbar__account__icon__img">
+    </a>
     {% endif %}
   </header>
 
