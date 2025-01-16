@@ -1,3 +1,11 @@
+
+:root {
+  --primary-color: wheat;
+  --primary-light-color: #F3EEEB;
+  --secondary-color: skyblue;
+  --secondary-bg-color: #E1EEFF;
+}
+
 .welcome-mesg {
   font-size: 22px;
   font-weight: 500;
@@ -6,7 +14,7 @@
 .quick-create {
   display: block;
 
-  background-color: wheat;
+  background-color: var(--primary-color);
   padding: 15px;
 
   font-size: 20px;
@@ -39,8 +47,12 @@
 
 .search__input {
   display: block;
+
   max-width: 100%;
   padding: 8px 0 8px 12px;
+
+  background-color: var(--secondary-bg-color);
+
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   border: 0.8px solid #2d2d2d;
@@ -50,7 +62,8 @@
   padding: 8px 12px;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
-  background-color: #EDEDED;
+
+  background-color: var(--secondary-color);
   color: #fff;
   border: 0.8px solid #2d2d2d;
 }
@@ -64,8 +77,8 @@
 }
 
 .entry {
-  background-color: #d6d6d6;
-  color: #000;
+  background-color: var(--primary-light-color);
+  color: black ;
   text-decoration: none;
 
   padding: 8px 12px;

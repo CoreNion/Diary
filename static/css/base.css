@@ -1,3 +1,10 @@
+:root {
+  --primary-color: wheat;
+  --primary-light-color: #F3EEEB;
+  --secondary-color: deepskyblue;
+  --secondary-bg-color: #E1EEFF;
+}
+
 body {
   margin: 0;
   background-color: white;
@@ -5,7 +12,7 @@ body {
 
 .top-navbar {
   padding: 14px;
-  background-color: #D9D9D9;
+  background-color: var(--primary-light-color);
 
   border-bottom: solid 1px;
 
