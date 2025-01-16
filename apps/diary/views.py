@@ -8,9 +8,20 @@ from .models import EntryModel
 
 def index(request):
   if request.user.is_authenticated:
+    search_mode = False
     # ログインしているユーザーの日記を取得、日付と時刻で降順ソート
     entry_list = EntryModel.objects.filter(user=request.user).order_by("-date", "-time")
-    return render(request, "diary/index_home.html", {'entry_list': entry_list})
+
+    # 検索(q)がある場合は絞り込み
+    q = request.GET.get("q")
+    if q:
+      search_mode = True
+      # キーワードをスペースで分割して、それぞれのキーワードが含まれるエントリーを取得
+      keywords = q.split()
+      for keyword in keywords:
+        entry_list = entry_list.filter(content__icontains=keyword)
+
+    return render(request, "diary/index_home.html", {'entry_list': entry_list, 'search_mode': search_mode})
   else:
     return render(request, "diary/index_entrance.html")
 

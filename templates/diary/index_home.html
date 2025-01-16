@@ -12,7 +12,17 @@
 <a href="{% url "diary:create" %}" class="quick-create">エントリーを作成</a>
 
 <section class="entries">
-  <h2 class="entries__title">最近の投稿</h2>
+  <div class="entries__header">
+    <h2 class="entries__title">最近の投稿</h2>
+    <form method="GET" action="{% url "diary:home" %}" class="search">
+      <input type="text" name="q" class="search__input" placeholder="検索" value="{{ request.GET.q }}">
+      <button type="submit" class="search__btn" aria-label="検索">🔍</button>
+    </form>
+
+    {% if search_mode %}
+      <span>検索結果: {{ entry_list|length }}件</span>
+    {% endif %}
+  </div>
 
   <div class="entry-list">
     {% for entry in entry_list %}
