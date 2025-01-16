@@ -8,7 +8,8 @@ from .models import EntryModel
 
 def index(request):
   if request.user.is_authenticated:
-    entry_list = EntryModel.objects.all()
+    # ログインしているユーザーの日記を取得、日付と時刻で降順ソート
+    entry_list = EntryModel.objects.filter(user=request.user).order_by("-date", "-time")
     return render(request, "diary/index_home.html", {'entry_list': entry_list})
   else:
     return render(request, "diary/index_entrance.html")
@@ -22,6 +23,9 @@ class EntryBaseView(LoginRequiredMixin):
 
   def get_object(self, queryset=None):
     obj: EntryModel = super().get_object(queryset)
+
+    if obj.user != self.request.user:
+      raise PermissionError("この記録を編集する権限がありません")
 
     # 日付と時刻をHTMLが理解できる文字列に変換
     obj.date = obj.date.strftime("%Y-%m-%d")
@@ -45,6 +49,12 @@ class EntryBaseView(LoginRequiredMixin):
     request.POST["tags"] = request.POST.getlist("tags")
 
     return super().post(request, *args, **kwargs)
+  
+  def form_valid(self, form):
+    # ユーザー情報をセット
+    form.instance.user = self.request.user
+
+    return super().form_valid(form)
   
 class CreateEntryView(EntryBaseView, CreateView):
     template_name = "diary/editor.html"
