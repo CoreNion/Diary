@@ -1,18 +1,37 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block title %}ログイン | Diary{% endblock title %}
+
+{% block exhead %}
+<link rel="stylesheet" href="{% static "css/accounts/field.css" %}">
+{% endblock exhead %}
 
 {% block content %}
-  <h1>ログイン</h1>
-  <form method="post" class="">
-    {% csrf_token %}
+  <div class="field-area">
+    <h1 class="title">Diaryへログイン</h1>
+
+    <!-- TO DO: エラ〜メッセージのスタイリング -->
     {% for error in form.errors.values %}
-     {{ error }}
+    {{ error }}
     {% endfor %}
-    <label>ユーザーID</label>
-    <input name="username">
 
-    <label>パスワード</label>
-    <input type="password" name="password">
+    <form method="post" class="field-form">
+      {% csrf_token %}
+  
+      <label class="field__title" for="username">ユーザーID</label>
+      <input type="text" name="username" class="field__input">
+  
+      <label class="field__title" for="password">パスワード</label>
+      <input type="password" name="password"  class="field__input">
+  
+      <button type="submit" class="form__button">ログインする</button>
+    </form>
 
-    <button type="submit" class="">ログインする</button>
-  </form>
+    <div class="field-area__links">
+      <a href="{% url "accounts:signup" %}" class="links__link">アカウントをお持ちでない方はこちら</a>
+      <a href="" class="links__link">パスワードを忘れた方はこちら</a>
+    </div>
+  </div>
+
 {% endblock content %}
