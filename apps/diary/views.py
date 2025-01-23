@@ -1,7 +1,8 @@
+from django.http import Http404
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse, reverse_lazy
 
 from .models import EntryModel
@@ -25,18 +26,18 @@ def index(request):
   else:
     return render(request, "diary/index_entrance.html")
 
-class EntryBaseView(LoginRequiredMixin):
+class EntryBaseView():
   """編集画面の基底クラス"""
 
   model = EntryModel
-  fields = {"title", "content", "tags", "date", "time"}
+  fields = {"title", "content", "tags", "date", "time", "public"}
   success_url = reverse_lazy("diary:home")
 
   def get_object(self, queryset=None):
     obj: EntryModel = super().get_object(queryset)
 
-    if obj.user != self.request.user:
-      raise PermissionError("この記録を編集する権限がありません")
+    if not obj.public and obj.user != self.request.user:
+      raise Http404
 
     # 日付と時刻をHTMLが理解できる文字列に変換
     obj.date = obj.date.strftime("%Y-%m-%d")
@@ -49,12 +50,20 @@ class EntryBaseView(LoginRequiredMixin):
 
     # データがある場合(UpdateView)のみ処理
     if self.object:
+      # 公開投稿で編集者ではない場合は読み取り専用にする
+      if self.object.public and self.object.user != self.request.user:
+        context["readonly"] = True
+      
       # タグを変数としてテンプレートに渡す
       context["tags"] = self.object.tags
 
     return context
   
   def post(self, request, *args, **kwargs):
+    # 公開投稿で編集者ではない場合はエラー
+    if self.get_object().public and self.get_object().user != request.user:
+      raise PermissionError
+
     # PostされたTagたちを適切な形式(リスト)に変換する
     request.POST = request.POST.copy()
     request.POST["tags"] = request.POST.getlist("tags")
@@ -67,11 +76,11 @@ class EntryBaseView(LoginRequiredMixin):
 
     return super().form_valid(form)
   
-class CreateEntryView(EntryBaseView, CreateView):
-    template_name = "diary/editor.html"
+class CreateEntryView(LoginRequiredMixin, EntryBaseView, CreateView):
+  template_name = "diary/editor.html"
 
 class UpdateEntryView(EntryBaseView, UpdateView):
-    template_name = "diary/editor.html"
+  template_name = "diary/editor.html"
 
 @require_POST
 def delete_entry(request, pk):
