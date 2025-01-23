@@ -60,9 +60,11 @@ class EntryBaseView():
     return context
   
   def post(self, request, *args, **kwargs):
-    # 公開投稿で編集者ではない場合はエラー
-    if self.get_object().public and self.get_object().user != request.user:
-      raise PermissionError
+    # データがある場合(UpdateView)のみ処理
+    if self.kwargs.get("pk"):
+      # 公開投稿で編集者ではない場合はエラー
+      if self.get_object().public and self.get_object().user != request.user:
+        raise PermissionError
 
     # PostされたTagたちを適切な形式(リスト)に変換する
     request.POST = request.POST.copy()
