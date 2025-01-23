@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}アカウント削除 | Diary{% endblock title %}
+
+{% block exhead %}
+<link rel="stylesheet" href="{% static "css/accounts/field.css" %}">
+{% endblock exhead %}
+
+{% block content %}
+  <div class="field-area">
+    <h1 class="title">アカウント削除</h1>
+
+    <p class="delete__message">アカウントを削除すると、全てのデータが削除されます。</p>
+
+    {{ form.non_field_errors }}
+    <form method="post" class="field-form">
+      {% csrf_token %}
+
+      <label class="field__title" for="password">パスワード</label>
+      <input type="password" name="password" class="field__input">
+      {{ form.password.errors }}
+      
+      <button type="submit" class="form__button">アカウントを削除する</button>
+    </form>
+  </div>
+{% endblock content %}

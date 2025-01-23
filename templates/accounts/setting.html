@@ -17,7 +17,7 @@
       <label class="field__title" for="username">ユーザーID</label>
       <input type="text" name="username" class="field__input" value="{{ user.username }}">
 
-      <a href="{% url "accounts:password" %}" class="field__link">パスワードの変更はこちら</a>
+      <a href="{% url "accounts:password_change" %}" class="field__link">パスワードの変更はこちら</a>
 
       <button type="submit" class="form__button">設定を保存する</button>
     </form>
