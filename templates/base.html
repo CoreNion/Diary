@@ -23,11 +23,11 @@
     {% if request.user.is_authenticated %}
 
     <div class="top-navbar__account">
-      <a href="#" class="top-navbar__account__icon">
+      <a href="{% url 'accounts:setting' %}" class="top-navbar__account__icon">
         <img src="{% static 'img/ui/account_circle.svg' %}" alt="Profile Icon" class="top-navbar__account__icon__img">
       </a>
       <div class="top-navbar__account__menu">
-        <a href="">設定</a>
+        <a href="{% url 'accounts:setting' %}">設定</a>
         <form method="POST" action="{% url 'accounts:logout' %}">
           {% csrf_token %}
           <button type="submit">ログアウト</button>

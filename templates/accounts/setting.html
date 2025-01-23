@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}アカウント | Diary{% endblock title %}
+
+{% block exhead %}
+<link rel="stylesheet" href="{% static "css/accounts/field.css" %}">
+{% endblock exhead %}
+
+{% block content %}
+  <div class="field-area">
+    <h1 class="title">アカウント設定</h1>
+
+    <form method="post" class="field-form">
+      {% csrf_token %}
+
+      <label class="field__title" for="username">ユーザーID</label>
+      <input type="text" name="username" class="field__input" value="{{ user.username }}">
+
+      <a href="{% url "accounts:password" %}" class="field__link">パスワードの変更はこちら</a>
+
+      <button type="submit" class="form__button">設定を保存する</button>
+    </form>
+
+    <div class="field-area__links">
+      <a href="{% url "accounts:delete" %}" class="links__link">アカウントを削除する</a>
+    </div>
+  </div>
+{% endblock content %}
