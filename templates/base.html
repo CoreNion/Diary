@@ -7,7 +7,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{% endblock title %}</title>
 
+  <link rel="icon" href="{% static "favicon.ico" %}">
+  <link rel="apple-touch-icon" href="{% static "img/icons/apple-touch-icon.png" %}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{% static "img/icons/icon-192.png" %}">
+  <link rel="icon" type="image/png" sizes="512x512" href="{% static "img/icons/icon-512.png" %}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{% static "img/icons/icon-192-maskable.png" %}" purpose="maskable">
+  <link rel="icon" type="image/png" sizes="512x512" href="{% static "img/icons/icon-512-maskable.png" %}" purpose="maskable">
+
   <link rel="stylesheet" href="{% static "css/base.css" %}">
+
+  <link rel="manifest" href="{% static "manifest.json" %}">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('{% static "js/service-worker.js" %}')
+        .then(function(registration) {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }).catch(function(error) {
+          console.log('ServiceWorker registration failed: ', error);
+        });
+    }
+  </script>
 
   {% block exhead %}{% endblock exhead %}
 </head>
