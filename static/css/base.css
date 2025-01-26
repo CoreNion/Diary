@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@100..900&display=swap');
+
 :root {
   --primary-color: wheat;
   --primary-light-color: #F3EEEB;
@@ -8,6 +10,7 @@
 body {
   margin: 0;
   background-color: white;
+  font-family: 'M PLUS 2', sans-serif;
 }
 
 .top-navbar {
@@ -82,7 +85,6 @@ body {
   border: none;
 
 }
-
 
 .main {
   margin: 10px;
