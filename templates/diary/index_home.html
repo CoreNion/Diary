@@ -19,6 +19,17 @@
       <button type="submit" class="search__btn" aria-label="検索">🔍</button>
     </form>
 
+    <ul class="entries__tags">
+      <li class="entries__tag">
+        <a href="{% url "diary:home" %}">全て</a>
+      </li>
+      {% for tag in tags %}
+        <li class="entries__tag">
+          <a href="{% url "diary:home" %}?tag={{ tag }}">#{{ tag }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
     {% if search_mode %}
       <span>検索結果: {{ entry_list|length }}件</span>
     {% endif %}

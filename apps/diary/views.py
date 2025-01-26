@@ -10,8 +10,17 @@ from .models import EntryModel
 def index(request):
   if request.user.is_authenticated:
     search_mode = False
-    # ログインしているユーザーの日記を取得、日付と時刻で降順ソート
-    entry_list = EntryModel.objects.filter(user=request.user).order_by("-date", "-time")
+    tags = []
+
+    # ログインしているユーザーの日記を取得
+    entry_list = EntryModel.objects.filter(user=request.user)
+
+    # タグ一覧を取得
+    have_tags = entry_list.exclude(tags=None)
+    for entry in have_tags:
+      for tag in entry.tags:
+        if tag not in tags:
+          tags.append(tag)
 
     # 検索(q)がある場合は絞り込み
     q = request.GET.get("q")
@@ -21,8 +30,21 @@ def index(request):
       keywords = q.split()
       for keyword in keywords:
         entry_list = entry_list.filter(content__icontains=keyword)
+  
+    # タグが選択されている場合は絞り込み
+    tag = request.GET.get("tag")
+    if tag:
+      search_mode = True
+      entry_list = entry_list.filter(tags__icontains=tag)
 
-    return render(request, "diary/index_home.html", {'entry_list': entry_list, 'search_mode': search_mode})
+    # 日付順に並び替え、最新30件を取得
+    entry_list = entry_list.order_by("-date", "-time")[:30]
+    # 本文が長い場合は先頭100文字のみ表示
+    for entry in entry_list:
+      if len(entry.content) > 100:
+        entry.content = entry.content[:100] + "..."
+
+    return render(request, "diary/index_home.html", {'entry_list': entry_list, 'search_mode': search_mode, 'tags': tags})
   else:
     return render(request, "diary/index_entrance.html")
 
