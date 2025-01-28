@@ -26,7 +26,7 @@
 <form method="POST" enctype="multipart/form-data" id="editor-form" class="entry-form"> {% csrf_token %}
   <input type="text" name="title" id="id_title" class="entry__textarea entry__title" value="{{ form.title.value|default_if_none:'' }}" placeholder="タイトル" {% if readonly %}readonly{% endif %} required>
   <section class="entry__datetime">
-    <input type="date" name="date" id="id_date" class="entry__date" value="{{ form.date.value|default_if_none:'' }}" {% if readonly %}readonly{% endif %}>
+    <input type="date" name="date" id="id_date" class="entry__date" value="{{ form.date.value|default_if_none:'' }}" {% if readonly %}readonly{% endif %} required>
     <input type="time" name="time" id="id_time" class="entry__time" value="{{ form.time.value|default_if_none:'' }}" {% if readonly %}readonly{% endif %} required>
     <input type="checkbox" name="public" id="id_public" class="entry__is_public" {% if form.public.value %}checked{% endif %} {% if readonly %}readonly{% endif %} >
     <label class="entry__public-desc" for="id_public">記録の公開</label>
