@@ -6,8 +6,7 @@
 }
 
 .entry-form {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 8px;
 }
 
@@ -16,10 +15,9 @@
   background: none;
   outline: none;
   
-  field-sizing: content;
-  max-height: fit-content;
-  
   resize: none;
+
+  font-size: medium;
   font-family: inherit;
 }
 
@@ -30,7 +28,7 @@
   font-size: 24px;
   font-weight: bold;
 
-  border-left: 2px black solid;
+  border-left: 3px black solid;
 }
 
 .entry__datetime {
@@ -122,7 +120,20 @@
   max-width: fit-content;
 }
 
-.entry__content {
-  font-size: medium;
+.entry__save {
+  padding: 8px 16px;
   margin: 8px 0;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  background: var(--primary-color);
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.entry__textarea {
+  margin-bottom: 8px;
 }

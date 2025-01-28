@@ -28,6 +28,12 @@ function checkEmptyTag(event) {
   }
 }
 
+/// テキストエリアの高さを自動調整
+document.getElementById("id_content").addEventListener("input", function (event) {
+  this.style.height = "auto";
+  this.style.height = this.scrollHeight + "px";
+});
+
 // 送信ボタンの処理
 document.getElementById("submit__btn").addEventListener("click", function (event) {
   // 送信
