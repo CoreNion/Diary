@@ -21,14 +21,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^0by=_63s!evsjsp%9(hxyj2s)3$1*l@u5dno36$s3ytn5mlf-'
+# 本番環境の設定
+if os.getenv("DJANGO_ENV") == "production":
+    # 環境変数から取得
+    SECRET_KEY = os.getenv("SECRET_KEY")
+    ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS")]
+    WSGI_APPLICATION = os.getenv("WSGI_APPLICATION")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ["*"]
-
+    # セキュリティ対策
+    DEBUG = False
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+# 開発環境の設定
+elif os.getenv("DJANGO_ENV") == "development":
+    SECRET_KEY = 'django-insecure-^0by=_63s!evsjsp%9(hxyj2s)3$1*l@u5dno36$s3ytn5mlf-'
+    DEBUG = True
+    ALLOWED_HOSTS = ["*"]
+else:
+    raise ValueError("DJANGO_ENVが設定されていません")
 
 # Application definition
 
