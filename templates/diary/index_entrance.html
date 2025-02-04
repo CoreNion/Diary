@@ -1,9 +1,19 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Diary{% endblock title %}
 
+{% block exhead %}
+<link rel="stylesheet" href="{% static "css/entrance.css" %}">
+{% endblock exhead %}
+
 {% block content %}
-<h1>Diary</h1>
-<a href="{% url "accounts:login" %}">ログイン</a>
-<a href="{% url "accounts:signup" %}">ユーザー登録</a>
+<section class="main-visual">
+  <img src="{% static 'img/icons/icon-512.png' %}" alt="Diary Icon" class="main-visual__icon">
+  <h1 class="main-visual__title">Diary</h1>
+  <p class="main-visual__desc">日記を書いてみましょう</p>
+
+  <a href="{% url "accounts:login" %}" class="main-visual__login">ログイン</a>
+  <a href="{% url "accounts:signup" %}" class="main-visual__signup">ユーザー登録</a>
+</section>
 {% endblock content %}

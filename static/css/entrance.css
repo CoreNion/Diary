@@ -1,0 +1,67 @@
+:root {
+  --primary-color: wheat;
+  --primary-light-color: #F3EEEB;
+  --secondary-color: skyblue;
+  --secondary-bg-color: #E1EEFF;
+}
+
+.main-visual {
+  height: 90vh;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  grid-template-areas:
+    "icon icon" 
+    "title title"
+    "desc desc"
+    "login signup";
+  gap: 16px;
+}
+
+.main-visual__icon {
+  grid-area: icon;
+  width: 200px;
+  height: 200px;
+}
+
+.main-visual__title {
+  grid-area: title;
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.main-visual__desc {
+  grid-area: desc;
+  margin: 0;
+  font-size: 20px;
+}
+
+.main-visual__login {
+  grid-area: login;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: var(--primary-color);
+  color: black;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.main-visual__login:hover {
+  background-color: var(--primary-light-color);
+}
+
+.main-visual__signup {
+  grid-area: signup;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: var(--secondary-color);
+  color: black;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.main-visual__signup:hover {
+  background-color: var(--secondary-bg-color);
+}
