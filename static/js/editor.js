@@ -29,6 +29,13 @@ function checkEmptyTag(event) {
 }
 
 /// テキストエリアの高さを自動調整
+// 読み込み時
+document.addEventListener("DOMContentLoaded", function () {
+  const content = document.getElementById("id_content");
+  content.style.height = "auto";
+  content.style.height = document.getElementById("id_content").scrollHeight + "px";
+});
+
 document.getElementById("id_content").addEventListener("input", function (event) {
   this.style.height = "auto";
   this.style.height = this.scrollHeight + "px";
