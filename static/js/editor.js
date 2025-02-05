@@ -1,3 +1,15 @@
+// タグのWidthを自動調整
+const setTagWidth = function (input) {
+  const tempSpan = document.createElement("span");
+  tempSpan.style.visibility = "hidden";
+  tempSpan.style.position = "absolute";
+  tempSpan.style.whiteSpace = "nowrap";
+  tempSpan.textContent = input.value || input.placeholder;
+  document.body.appendChild(tempSpan);
+  input.style.width = (tempSpan.scrollWidth + 5) + "px";
+  document.body.removeChild(tempSpan);
+};
+
 // タグ追加ボタンをクリックしたときの処理
 const addTagBtn = document.getElementById("tags__add");
 addTagBtn.addEventListener("click", function () {
@@ -5,6 +17,14 @@ addTagBtn.addEventListener("click", function () {
   const template = document.getElementById("tag-template");
   var tag = template.content.cloneNode(true);
   document.getElementById("id_tags").insertBefore(tag, addTagBtn);
+
+  // 追加された最後のタグ要素にフォーカス
+  const added = document.getElementById("id_tags").querySelectorAll(":nth-last-child(2)")[0].querySelector(".tag__input");
+  added.focus();
+  // 追加されたタグ要素の幅を調整
+  added.addEventListener("input", function (event) {
+    setTagWidth(event.target);
+  });
 });
 
 // タグに何も入力されなかった場合はタグ要素削除
@@ -41,6 +61,12 @@ document.getElementById("id_content").addEventListener("input", function (event)
   this.style.height = this.scrollHeight + "px";
 });
 
+document.querySelectorAll(".tag__input").forEach(function(input) {
+  setTagWidth(input);
+  input.addEventListener("input", function(event) {
+    setTagWidth(event.target);
+  });
+});
 
 // 送信ボタンの処理
 document.getElementById("submit__btn").addEventListener("click", function (event) {
